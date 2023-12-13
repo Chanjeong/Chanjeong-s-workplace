@@ -16,7 +16,7 @@ body {
   align-items: center;
 }
 
-.speakerform-hedaer {
+.speaker-form-header {
   text-align: center;
   background-color: #F6F7F8;
   border: 1px solid #D6D9DC;
@@ -27,7 +27,7 @@ body {
   padding: 50px;
 }
 
-.speakerform-hedaer h1{
+.speaker-form-header h1{
   font-size: 30px;
   margin-bottom: 20px;
 }
@@ -136,7 +136,7 @@ body {
 }
 
 .form-row select {
-  width: 0%;
+  width: 50%;
   padding: 5px;
   font-size: 14px;            /* This won't work in Chrome or Safari */   /* This will make it work */
 }
