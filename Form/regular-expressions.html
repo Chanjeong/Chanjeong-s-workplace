@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Form validation: Task 2</title>
+    <style>
+      body {
+        background-color: #fff;
+        color: #333;
+        font: 1em / 1.4 Helvetica Neue, Helvetica, Arial, sans-serif;
+        padding: 1em;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      [type='text'][name='uname']:invalid:required {
+        border: 1px solid red;
+      }
+
+      [type='text'][name='uname']:valid {
+        border: 1px solid green;
+      }
+
+      [type='text'][name='email']:invalid:required {
+        border: 1px solid red;
+      }
+
+      [type='text'][name='email']:valid {
+        border: 1px solid green;
+      }
+
+      [type='text'][name='phone']:invalid:required {
+        border: 1px solid red;
+      }
+
+      [type='text'][name='phone']:valid {
+        border: 1px solid green;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form>
+      <h2>Enter your support query</h2>
+      <ul>
+        <li>
+          <label for="uname">User name:</label>
+          <!-- All of the user names in our application consist of a single letter, followed by a dot, followed by three or more letters or numbers. All letters should be lowercase. -->
+          <input type="text" name="uname" id="uname" pattern="[a-z]\.[a-z0-9]{3,}" required> 
+        </li>
+        <li>
+          <label for="email">Email address:</label>
+          <!-- All of the email addresses for our users consist of one or more letters (lower or upper case) or numbers, followed by "@bigcorp.eu". -->
+          <input type="text" name="email" id="email" pattern="[a-zA-Z0-9]+@bigcorp\.eu" required>
+        </li>
+        <li>
+          <label for="phone">Phone number:</label>
+          <!-- Remove the length validation from the phone number field if it is present, and set it so that it accepts 10 digits — either 10 digits in a row, or a pattern of three digits, three digits, then four digits, separated by either spaces, dashes, or dots. -->
+          <input type="text" name="phone" id="phone" pattern="\d{3}[\s\.-]?\d{3}[\s\.-]?\d{4}" required>
+        </li>
+        <li>
+          <label for="comment">Comment:</label>
+          <textarea name="comment" id="comment" required></textarea>
+        </li>
+        <li>
+          <button>Submit comment</button>
+        </li>
+      </ul>
+    </form>
+
+    <script>
+      // JavaScript 부분은 현재는 필요하지 않습니다. 사용자 입력을 실시간으로 확인할 필요가 없는 경우에 사용됩니다.
+    </script>
+  </body>
+</html>
