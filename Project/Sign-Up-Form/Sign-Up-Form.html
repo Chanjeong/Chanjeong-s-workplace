@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign-up Form</title>
+  <link rel="stylesheet" href="sign-up-form.css">
+</head>
+<body>
+    <form class="signup-form">
+      <strong>This is not a real online service! 
+        You know you need something like this in your life to help you realize your deepest dreams.
+        Sign up <em>now</em> to get started.</strong>
+      <p><strong>You know you want to </strong></p>
+      <fieldset>
+        <legend><strong>Let's do this!</strong></legend>
+        <label for="first_name">FIRST NAME</label>
+        <input type="text" id="firstname" name="first_name">
+        <span></span>
+        <label for="last_name">LAST NAME</label>
+        <input type="text" id="lastname" name="last_name">
+        <span></span>
+        <label for="email">EMAIL</label>
+        <input type="email" name="email" id="email">
+        <span></span>
+        <label for="pnumber">PHONE NUMBER</label>
+        <input type="text" name="phonenumber" id="pnumber" placeholder="please input without '-'" 
+        pattern="\d*" minlength="10" maxlength="11">
+        <span></span>
+        <label for="password">PASSWORD</label>
+        <input type="password" name="password" id="password">
+        <span></span>
+        <label for="confirmpassword">CONFIRM PASSWORD</label>
+        <input type="password" id="confirmpassword" name="confirmpassword">
+        <span></span>
+      </fieldset>
+      <button for="submit">Create Account</button>
+      <div class="login"><strong>Already have an account? <span>Log in</span></strong></div>
+    </form>
+</body>
+</html>
