@@ -1,0 +1,103 @@
+@font-face {
+  font-family: "handwriting";
+  src:
+  url(Norse-Bold.otf) format(Norse-Bold);
+  font-weight: normal;
+  font-style: normal;
+}
+body{
+  background-color: #f6f5f5;
+  background-image: url(green-leaf.png);
+  background-size:  400px 750px;
+  background-repeat: no-repeat;
+}
+
+.signup-form{
+  position: relative;
+  left: 400px;
+  height: 500px;
+  padding: 40px 40px;
+}
+
+fieldset{
+  position: relative;
+  border: none;
+  background-color: white;
+  right: 50px;
+  width: 550px;
+  padding: 50px;
+}
+legend{
+  position: relative;
+  top: 10px;
+  font-size: 18px;
+}
+
+label{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color:gray;
+  padding: 10px 10px;
+  display: block;
+}
+
+input{
+  border:  1px solid #E5E7EB;
+  border-radius: 3px;
+}
+
+input:focus {
+  border: 1px solid rgb(78, 78, 231);
+  outline: none;
+}
+input + span{
+  position: relative;
+}
+
+input + span::before{
+  position:absolute;
+  right: -20px;
+}
+
+input:valid + span::before{
+  content:'\2713';
+  color: green;
+}
+input:invalid{
+  border: 1px solid red;
+}
+input:invalid + span::before{
+  content:'\2717';
+  color: red;
+}
+
+button{
+  background-color: #596D48;
+  margin-top: 30px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 40px;
+}
+button:hover{
+  background-color: #76AEED;
+}
+button:active {
+  background-color: #407FC7;
+}
+.login{
+  margin-top: 30px;
+}
+span{
+  color: green;
+}
+
+@media only screen and (min-width: 700px){
+  .signup-form{
+    width: 490px;
+  }
+}
+
+
+
