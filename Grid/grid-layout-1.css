@@ -1,64 +1,43 @@
 .container{
   display: grid;
-  grid-template-columns: repeat(5, 300px);
-  grid-template-rows: repeat(9, 100px);
+  grid-template-columns: repeat(4, 450px);
+  grid-template-rows: repeat(8, 100px);
   gap: 15px;
+}
+.container div{
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .Header{
-  color: white;
-  font-size: 30px;
-  font-weight: 700;
-  border: none;
-  border-radius: 10px;
-  text-align: center;
   background-color: rgb(26, 87, 66);
-  grid-column: 1 / span 4;
+  grid-column:1/4;
+  grid-row: 1/2;
 }
 
 .Sidebar{
-  color: white;
-  font-size: 30px;
-  font-weight: 700;
-  border: none;
-  border-radius: 10px;
-  text-align: center;
   background-color: rgb(35, 86, 238);
-  grid-column: 1 / span 1;
-  grid-row: 2 / span 5;
+  grid-column: 1/2;
+  grid-row: 2/7;
 }
 .Nav{
-  color: white;
-  font-size: 30px;
-  font-weight: 700;
-  border: none;
-  border-radius: 10px;
-  text-align: center;
   background-color: rgb(76, 25, 230);
-  grid-column: 2 / span 3;
-  grid-row: 2 / span 1;
+  grid-column: 2/4;
+  grid-row: 2/3;
 }
 
 .Article{
-  color: white;
-  font-size: 30px;
-  font-weight: 700;
-  border: none;
-  border-radius: 10px;
-  text-align: center;
   background-color: rgb(150, 37, 225);
-  grid-column: 2 / span 3;
-  grid-row: 3 / span 4;
+  grid-column: 2/4;
+  grid-row: 3/7;
 }
 
 .Footer{
-  color: white;
-  font-size: 30px;
-  font-weight: 700;
-  border: none;
-  border-radius: 10px;
-  text-align: center;
   background-color: rgb(76, 73, 73);
-  grid-column: 1 / span 4;
-  grid-row: 7 / span 1;
+  grid-column: 1/4;
+  grid-row: 7/8;
 }
