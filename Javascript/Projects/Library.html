@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Library.css" />
+    <title>Library</title>
+  </head>
+  <body>
+    <div id="container">
+      <button onclick="newBook()">NEW BOOK</button>
+    </div>
+    <script>
+      const myLibrary = [];
+      let currentBook = null;
+
+      function Book(author, title, pages, read) {
+        this.author = author;
+        this.title = title;
+        this.pages = pages;
+        this.read = read;
+      }
+
+      function newBook() {
+        if (!currentBook) {
+          currentBook = document.createElement("div");
+          currentBook.innerHTML = `
+        <div class="bookInformation">
+        <label for="author">Author</label>
+        <input type="text" name="author" id="author" />
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" />
+        <label for="pages">Pages</label>
+        <input type="number" name="pages" id="pages" />
+        <label for="read">Read</label>
+        <select name="readornot" id="readornot">
+          <option value="read">Read</option>
+          <option value="no">No</option>
+        </select>
+        <button onClick="addBookToLibrary()">ADD BOOK</button>
+      </div>
+      `;
+          const container = document.querySelector("#container");
+          container.appendChild(currentBook);
+        }
+      }
+
+      function addBookToLibrary() {
+        const authorInput = document.getElementById("author");
+        const titleInput = document.getElementById("title");
+        const pagesInput = document.getElementById("pages");
+        const readInput = document.getElementById("readornot");
+
+        const author = authorInput.value;
+        const title = titleInput.value;
+        const pages = pagesInput.value;
+        const read = readInput.value;
+
+        const newBook = new Book(author, title, pages, read);
+        myLibrary.push(newBook);
+
+        authorInput.value = "";
+        titleInput.value = "";
+        pagesInput.value = "";
+      }
+
+      myLibrary.forEach(function (e) {
+        displayBooks(e);
+      });
+
+      function displayBooks(book) {
+        const newBook = document.createElement("li");
+        newBook.innerHTML = `
+        <div>
+          ${book.author} ${book.title} ${book.pages} ${book.read}
+          <div>            
+        `;
+      }
+
+      function removeBook() {}
+    </script>
+  </body>
+</html>

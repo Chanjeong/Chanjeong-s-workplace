@@ -1,0 +1,10 @@
+.bookInformation{
+  display: grid;
+  grid-template-rows: repeat(10,30px);
+  grid-auto-rows: 30px;
+}
+
+.bookInformation input, select, button{
+  margin-bottom: 10px;
+  width: 100px;
+}
