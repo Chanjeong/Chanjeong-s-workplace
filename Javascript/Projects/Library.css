@@ -1,3 +1,7 @@
+#container{
+  display: grid;
+  grid-template-rows: auto;
+}
 .bookInformation{
   display: grid;
   grid-template-rows: repeat(10,30px);
@@ -7,4 +11,19 @@
 .bookInformation input, select, button{
   margin-bottom: 10px;
   width: 100px;
+}
+
+::backdrop{
+  background-image: linear-gradient(
+    rgb(211, 211, 141),
+    rgb(89, 186, 247),
+    rgb(80, 232, 80)
+  );
+  opacity: 0.75;
+}
+
+.displayBooks{
+  display: grid;
+  grid-template-rows: repeat(10, 30px);
+  grid-auto-rows: 30px;
 }

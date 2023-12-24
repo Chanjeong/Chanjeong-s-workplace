@@ -8,11 +8,29 @@
   </head>
   <body>
     <div id="container">
-      <button onclick="newBook()">NEW BOOK</button>
+      <dialog id="registerDialog">
+        <div class="bookInformation">
+          <label for="author">Author</label>
+          <input type="text" name="author" id="author" required />
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" required />
+          <label for="pages">Pages</label>
+          <input type="number" name="pages" id="pages" required />
+          <label for="read">Read</label>
+          <select name="readornot" id="readornot">
+            <option value="read">Read</option>
+            <option value="no">No</option>
+          </select>
+          <button onClick="addBookToLibrary()">ADD BOOK</button>
+          <button autofocus>Close</button>
+        </div>
+      </dialog>
+      <dialog id="displayDialog"></dialog>
+      <button id="showButton">NEW BOOK</button>
+      <button id="displayButton" onclick="displayBook()">Display Book</button>
     </div>
     <script>
       const myLibrary = [];
-      let currentBook = null;
 
       function Book(author, title, pages, read) {
         this.author = author;
@@ -21,63 +39,80 @@
         this.read = read;
       }
 
-      function newBook() {
-        if (!currentBook) {
-          currentBook = document.createElement("div");
-          currentBook.innerHTML = `
-        <div class="bookInformation">
-        <label for="author">Author</label>
-        <input type="text" name="author" id="author" />
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" />
-        <label for="pages">Pages</label>
-        <input type="number" name="pages" id="pages" />
-        <label for="read">Read</label>
-        <select name="readornot" id="readornot">
-          <option value="read">Read</option>
-          <option value="no">No</option>
-        </select>
-        <button onClick="addBookToLibrary()">ADD BOOK</button>
-      </div>
-      `;
-          const container = document.querySelector("#container");
-          container.appendChild(currentBook);
-        }
-      }
+      const registerDialog = document.querySelector("#registerDialog");
+      const displayDialog = document.querySelector("#displayDialog");
+      const showButton = document.querySelector("#showButton");
+      const closeButton = document.querySelector(
+        "#registerDialog button[autofocus]"
+      );
+      const displayButton = document.querySelector("#displayButton");
+
+      showButton.addEventListener("click", () => {
+        registerDialog.showModal();
+      });
+
+      closeButton.addEventListener("click", () => {
+        registerDialog.close();
+      });
+
+      displayButton.addEventListener("click", () => {
+        displayDialog.showModal();
+      });
 
       function addBookToLibrary() {
         const authorInput = document.getElementById("author");
         const titleInput = document.getElementById("title");
         const pagesInput = document.getElementById("pages");
-        const readInput = document.getElementById("readornot");
+        if (
+          authorInput.checkValidity() &&
+          titleInput.checkValidity() &&
+          pagesInput.checkValidity()
+        ) {
+          const readInput = document.getElementById("readornot");
 
-        const author = authorInput.value;
-        const title = titleInput.value;
-        const pages = pagesInput.value;
-        const read = readInput.value;
+          const author = authorInput.value;
+          const title = titleInput.value;
+          const pages = pagesInput.value;
+          const read = readInput.value;
 
-        const newBook = new Book(author, title, pages, read);
-        myLibrary.push(newBook);
+          const newBook = new Book(author, title, pages, read);
+          myLibrary.push(newBook);
 
-        authorInput.value = "";
-        titleInput.value = "";
-        pagesInput.value = "";
+          authorInput.value = "";
+          titleInput.value = "";
+          pagesInput.value = "";
+        } else {
+          alert("모든 필수 입력 항목을 작성해주세요.");
+        }
       }
 
-      myLibrary.forEach(function (e) {
-        displayBooks(e);
-      });
-
-      function displayBooks(book) {
-        const newBook = document.createElement("li");
-        newBook.innerHTML = `
-        <div>
-          ${book.author} ${book.title} ${book.pages} ${book.read}
-          <div>            
-        `;
+      function displayBook() {
+        displayDialog.innerHTML = "<button autofocus>Close</button>";
+        const displayClose = displayDialog.querySelector("button[autofocus]");
+        displayClose.addEventListener("click", () => {
+          displayDialog.close();
+        });
+        if (myLibrary && myLibrary.length > 0) {
+          for (let i = 0; i < myLibrary.length; i++) {
+            const bookDiv = document.createElement("div");
+            bookDiv.classList.add("displayBooks");
+            bookDiv.innerHTML = `
+        <div>Book Author: ${myLibrary[i].author}</div>
+        <div>Book Title: ${myLibrary[i].title}</div>
+        <div>Book Pages: ${myLibrary[i].pages}</div>
+        <div>Read or Not: ${myLibrary[i].read}</div>
+        <button onClick=removeBook()>Remove</button>
+        <button>Read Status</button>
+      `;
+            displayDialog.appendChild(bookDiv);
+          }
+        }
       }
 
-      function removeBook() {}
+      function removeBook(index) {
+        myLibrary.splice(index, 1);
+        displayBook();
+      }
     </script>
   </body>
 </html>
