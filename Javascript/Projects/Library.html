@@ -101,16 +101,25 @@
         <div>Book Title: ${myLibrary[i].title}</div>
         <div>Book Pages: ${myLibrary[i].pages}</div>
         <div>Read or Not: ${myLibrary[i].read}</div>
-        <button onClick=removeBook()>Remove</button>
-        <button>Read Status</button>
+        <button onClick=removeBook(${i})>Remove</button>
+        <button onClick=changeStatus(${i})>Read Status</button>
       `;
             displayDialog.appendChild(bookDiv);
           }
         }
       }
 
+      Book.prototype.changeStatus = function () {
+        this.read = this.read === "read" ? "no" : "read";
+      };
+
       function removeBook(index) {
         myLibrary.splice(index, 1);
+        displayBook();
+      }
+
+      function changeStatus(index) {
+        myLibrary[index].changeStatus();
         displayBook();
       }
     </script>
