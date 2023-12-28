@@ -3,37 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Connect Four Game</title>
-    <style>
-      /* Add your styles here */
-      .board {
-        display: grid;
-        grid-template-columns: repeat(7, 50px);
-        grid-gap: 5px;
-      }
-
-      .row {
-        display: flex;
-      }
-
-      .cell {
-        width: 50px;
-        height: 50px;
-        border: 1px solid #000;
-        font-size: 24px;
-        cursor: pointer;
-      }
-
-      .turn {
-        margin-top: 10px;
-        font-size: 18px;
-      }
-    </style>
+    <title>Tic Tac Toe Game</title>
+    <link rel="stylesheet" href="TicTacToe.css" />
   </head>
   <body>
-    <div class="board"></div>
-    <div class="turn"></div>
-
+    <div id="board">
+      <table>
+        <caption>
+          Tic Tac Toe Game!!!
+        </caption>
+        <tr>
+          <th id="cell" onclick="displayController()"></th>
+          <th id="cell" onclick="displayController()"></th>
+          <th id="cell" onclick="displayController()"></th>
+        </tr>
+        <tr>
+          <th id="cell" onclick="displayController()"></th>
+          <th id="cell" onclick="displayController()"></th>
+          <th id="cell" onclick="displayController()"></th>
+        </tr>
+        <tr>
+          <th id="cell" onclick="displayController()"></th>
+          <th id="cell" onclick="displayController()"></th>
+          <th id="cell" onclick="displayController()"></th>
+        </tr>
+      </table>
+    </div>
     <script src="TicTacToe.js"></script>
   </body>
 </html>
