@@ -12,15 +12,13 @@ function GameBoard() {
 
   const getBoard = () => board;
 
-  const placeToken = (column, player) => {
+  const placeToken = (row, column, player) => {
     const availableCells = board
       .filter((row) => row[column].getValue() === 0)
       .map((row) => row[column]);
 
     if (!availableCells) return;
-
-    const lowestRow = availableCells.length - 1;
-    board[lowestRow][column].addToken(player);
+    board[row][column].addToken(player);
   };
 
   const printBoard = () => {
@@ -77,34 +75,101 @@ function GameController(
     console.log(`${getActivePlayer().name}'s turn`);
   };
 
-  const playRound = (column) => {
+  const playRound = (row, column) => {
     console.log(
-      `Dropping ${getActivePlayer().name}'s token into column ${column}...`
+      `Dropping ${
+        getActivePlayer().name
+      }'s token into ${row} row and ${column} column...`
     );
-    board.placeToken(column, getActivePlayer().token);
+    board.placeToken(row, column, getActivePlayer().token);
 
-    switchPlayerTurn();
-    printNewRound();
+    const winner = () => checkWinner;
+    if (winner) {
+      alert(`The Winner is ${getActivePlayer().name}! Do you want to restart?`);
+    } else {
+      switchPlayerTurn();
+      printNewRound();
+    }
   };
 
-  printNewRound();
+  const checkWinner = () => {
+    const winPatterns = [
+      [
+        [0, 0],
+        [0, 1],
+        [0, 2],
+      ],
+      [
+        [1, 0],
+        [1, 1],
+        [1, 2],
+      ],
+      [
+        [2, 0],
+        [2, 1],
+        [2, 2],
+      ],
+      [
+        [0, 0],
+        [1, 0],
+        [2, 0],
+      ],
+      [
+        [0, 1],
+        [1, 1],
+        [2, 1],
+      ],
+      [
+        [0, 2],
+        [1, 2],
+        [2, 2],
+      ],
+      [
+        [0, 0],
+        [1, 1],
+        [2, 2],
+      ],
+      [
+        [0, 2],
+        [1, 1],
+        [2, 0],
+      ],
+    ];
 
-  return { playRound, getActivePlayer };
+    for (const pattern of winPatterns) {
+      const [a, b, c] = pattern;
+      const cellA = board[a[0]][a[1]];
+      const cellB = board[b[0]][b[1]];
+      const cellC = board[c[0]][c[1]];
+      if (cellA !== 0 && cellA == cellB && cellA == cellC) {
+        return getActivePlayer();
+      }
+    }
+
+    if (board.flat().every((cell) => cell.getValue() !== 0)) {
+      alert("The Game is Over! Draw! Do you want to restart?");
+      return null;
+    }
+  };
+
+  return { playRound, getActivePlayer, checkWinner };
 }
 
-function displayController() {
-  const getGameController = () => GameController;
-  const activePlayer = getGameController.getActivePlayer;
+// function displayController() {
+//   const startButton = document.getElementById("start");
+//   const restartButton = document.getElementById("restart");
 
-  const square = document.querySelector("#cell");
-  const board = document.querySelector("#board");
-  square.addEventListener("click", () => {
-    const randomColumn = Math.floor(Math.floor(Math.random() * 3));
-    cell.innerHTML = `${activePlayer.name}'s token into column ${randomColumn}`;
-    cell.classList.add(
-      activePlayer.token === "O" ? "player-one" : "player-two"
-    );
-  });
-}
+//   startButton.addEventListener("click", () => {
+//     const playerOne = document.getElementById("playerNameOne").value;
+//     const playerTwo = document.getElementById("playerNameTwo").value;
 
-const game = displayController();
+//     const gameController = GameController(playerOne, playerTwo);
+
+//     document.getElementById("playerNameOne").value = "";
+//     document.getElementById("playerNameTwo").value = "";
+//   });
+//   const board = document.querySelector("#board");
+
+// }
+
+const game = GameController();

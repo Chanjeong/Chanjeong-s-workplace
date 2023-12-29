@@ -10,24 +10,30 @@
     <div id="board">
       <table>
         <caption>
-          Tic Tac Toe Game!!!
+          <h1>Tic Tac Toe Game!!!</h1>
+          <label for="playerNameOne">Player Name 1:</label>
+          <input type="text" id="playerNameOne" name="playerNameOne" required />
+          <label for="playerNameTwo">Player Name 2:</label>
+          <input type="text" id="playerNameTwo" name="playerNameTwo" required />
         </caption>
         <tr>
-          <th id="cell" onclick="displayController()"></th>
-          <th id="cell" onclick="displayController()"></th>
-          <th id="cell" onclick="displayController()"></th>
+          <th id="cell00" onclick="displayController()"></th>
+          <th id="cell01" onclick="displayController()"></th>
+          <th id="cell02" onclick="displayController()"></th>
         </tr>
         <tr>
-          <th id="cell" onclick="displayController()"></th>
-          <th id="cell" onclick="displayController()"></th>
-          <th id="cell" onclick="displayController()"></th>
+          <th id="cell10" onclick="displayController()"></th>
+          <th id="cell11" onclick="displayController()"></th>
+          <th id="cell12" onclick="displayController()"></th>
         </tr>
         <tr>
-          <th id="cell" onclick="displayController()"></th>
-          <th id="cell" onclick="displayController()"></th>
-          <th id="cell" onclick="displayController()"></th>
+          <th id="cell20" onclick="displayController()"></th>
+          <th id="cell21" onclick="displayController()"></th>
+          <th id="cell22" onclick="displayController()"></th>
         </tr>
       </table>
+      <button type="submit" id="start">Start</button>
+      <button type="submit" id="restart">Restart</button>
     </div>
     <script src="TicTacToe.js"></script>
   </body>
