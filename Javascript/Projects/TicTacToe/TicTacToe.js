@@ -3,8 +3,6 @@ function displayController() {
   const boardElement = document.getElementById("board");
   const startButton = document.getElementById("start");
   const restartButton = document.getElementById("restart");
-  const playerOneNameInput = document.getElementById("playerNameOne");
-  const playerTwoNameInput = document.getElementById("playerNameTwo");
   const statusElement = document.getElementById("status");
 
   let gameActive = false;
@@ -25,24 +23,11 @@ function displayController() {
   restartButton.addEventListener("click", restartGame);
 
   function startGame() {
-    let playerOne = playerOneNameInput.value || "Player One";
-    let playerTwo = playerTwoNameInput.value || "Player Two";
-    let players = [
-      {
-        name: playerOne,
-        token: "O",
-      },
-      {
-        name: playerTwo,
-        token: "X",
-      },
-    ];
-
     initializeBoard();
     gameActive = true;
 
-    activePlayer = players[1];
-    statusElement.textContent = `${activePlayer.name}'s turn`;
+    activePlayer = players[0];
+    // statusElement.textContent = `${activePlayer.name}'s turn`;
   }
 
   function restartGame() {
@@ -96,7 +81,9 @@ function displayController() {
   const updateGameStatus = () => {
     if (gameActive) {
       statusElement.textContent = `${
-        activePlayer === players[0] ? players[1] : players[0]
+        activePlayer.name === players[0].name
+          ? players[0].name
+          : players[1].name
       }'s turn`;
     }
   };
@@ -142,96 +129,3 @@ function displayController() {
 document.addEventListener("DOMContentLoaded", function () {
   const game = displayController();
 });
-
-// console edition
-// function GameBoard() {
-//   const rows = 3;
-//   const columns = 3;
-//   const board = [];
-
-//   for (let i = 0; i < rows; i++) {
-//     board[i] = [];
-//     for (let j = 0; j < columns; j++) {
-//       board[i].push(Cell());
-//     }
-//   }
-
-//   const getBoard = () => board;
-
-//   const placeToken = (row, column, player) => {
-//     const availableCells = board
-//       .filter((row) => row[column].getValue() === 0)
-//       .map((row) => row[column]);
-
-//     if (!availableCells) return;
-//     board[row][column].addToken(player);
-//   };
-
-//   const printBoard = () => {
-//     const boardWithCellValues = board.map((row) =>
-//       row.map((cell) => cell.getValue())
-//     );
-//     console.log(boardWithCellValues);
-//   };
-
-//   return { getBoard, placeToken, printBoard };
-// }
-
-// function Cell() {
-//   let value = 0;
-
-//   const addToken = (player) => {
-//     value = player;
-//   };
-
-//   const getValue = () => value;
-
-//   return {
-//     addToken,
-//     getValue,
-//   };
-// }
-
-// function GameController(
-//   playerOneName = "Player One",
-//   playerTwoName = "Player Two"
-// ) {
-//   const board = GameBoard();
-
-//   const players = [
-//     {
-//       name: playerOneName,
-//       token: "O",
-//     },
-//     {
-//       name: playerTwoName,
-//       token: "X",
-//     },
-//   ];
-
-//   let activePlayer = players[0];
-
-//   const switchPlayerTurn = () => {
-//     activePlayer = activePlayer === players[0] ? players[1] : players[0];
-//   };
-//   const getActivePlayer = () => activePlayer;
-
-//   const printNewRound = () => {
-//     board.printBoard();
-//     console.log(`${getActivePlayer().name}'s turn`);
-//   };
-
-//   const playRound = (row, column) => {
-//     console.log(
-//       `Dropping ${
-//         getActivePlayer().name
-//       }'s token into ${row} row and ${column} column...`
-//     );
-//     board.placeToken(row, column, getActivePlayer().token);
-
-//     switchPlayerTurn();
-//     printNewRound();
-//   };
-
-//   return { playRound, getActivePlayer };
-// }
