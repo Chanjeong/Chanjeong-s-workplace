@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Library.css" />
+    <title>Library</title>
+  </head>
+  <body>
+    <div id="container">
+      <dialog id="registerDialog">
+        <div class="bookInformation">
+          <label for="author">Author</label>
+          <input type="text" name="author" id="author" required />
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" required />
+          <label for="pages">Pages</label>
+          <input type="number" name="pages" id="pages" required />
+          <label for="read">Read</label>
+          <select name="readornot" id="readornot">
+            <option value="read">Read</option>
+            <option value="no">No</option>
+          </select>
+          <button onClick="addBookToLibrary()">ADD BOOK</button>
+          <button autofocus>Close</button>
+        </div>
+      </dialog>
+      <dialog id="displayDialog"></dialog>
+      <button id="showButton">NEW BOOK</button>
+      <button id="displayButton" onclick="displayBook()">Display Book</button>
+    </div>
+    <script>
+      class Book{
+
+      }
+      class Library{
+        
+      }
+    </script>
+  </body>
+</html>
