@@ -21,21 +21,113 @@
             <option value="read">Read</option>
             <option value="no">No</option>
           </select>
-          <button onClick="addBookToLibrary()">ADD BOOK</button>
+          <button onClick="library.addBook()">ADD BOOK</button>
           <button autofocus>Close</button>
         </div>
       </dialog>
       <dialog id="displayDialog"></dialog>
       <button id="showButton">NEW BOOK</button>
-      <button id="displayButton" onclick="displayBook()">Display Book</button>
+      <button id="displayButton" onclick="library.displayBooks()">
+        Display Book
+      </button>
     </div>
     <script>
-      class Book{
+      class Book {
+        constructor(author, title, pages, read) {
+          this.author = author;
+          this.title = title;
+          this.pages = pages;
+          this.read = read;
+        }
 
+        changeStatus() {
+          this.read = this.read === "read" ? "no" : "read";
+        }
       }
-      class Library{
-        
+
+      class Library {
+        constructor() {
+          this.myLibrary = [];
+          this.registerDialog = document.querySelector("#registerDialog");
+          this.displayDialog = document.querySelector("#displayDialog");
+        }
+
+        addBook() {
+          const authorInput = document.getElementById("author");
+          const titleInput = document.getElementById("title");
+          const pagesInput = document.getElementById("pages");
+
+          if (
+            authorInput.checkValidity() &&
+            titleInput.checkValidity() &&
+            pagesInput.checkValidity()
+          ) {
+            const readInput = document.getElementById("readornot");
+
+            const author = authorInput.value;
+            const title = titleInput.value;
+            const pages = pagesInput.value;
+            const read = readInput.value;
+
+            const newBook = new Book(author, title, pages, read);
+            this.myLibrary.push(newBook);
+
+            authorInput.value = "";
+            titleInput.value = "";
+            pagesInput.value = "";
+          } else {
+            alert("모든 필수 입력 항목을 작성해주세요.");
+          }
+        }
+
+        displayBooks() {
+          this.displayDialog.innerHTML = "<button autofocus>Close</button>";
+          const displayClose =
+            this.displayDialog.querySelector("button[autofocus]");
+          displayClose.addEventListener("click", () => {
+            this.displayDialog.close();
+          });
+          if (this.myLibrary && this.myLibrary.length > 0) {
+            for (let i = 0; i < this.myLibrary.length; i++) {
+              const bookDiv = document.createElement("div");
+              bookDiv.classList.add("displayBooks");
+              bookDiv.innerHTML = `
+                <div>Book Author: ${this.myLibrary[i].author}</div>
+                <div>Book Title: ${this.myLibrary[i].title}</div>
+                <div>Book Pages: ${this.myLibrary[i].pages}</div>
+                <div>Read or Not: ${this.myLibrary[i].read}</div>
+                <button onClick="library.removeBook(${i})">Remove</button>
+                <button onClick="library.changeStatus(${i})">Read Status</button>
+              `;
+              this.displayDialog.appendChild(bookDiv);
+            }
+          }
+        }
+
+        removeBook(index) {
+          this.myLibrary.splice(index, 1);
+          this.displayBooks();
+        }
+
+        changeStatus(index) {
+          this.myLibrary[index].changeStatus();
+          this.displayBooks();
+        }
       }
+
+      const library = new Library();
+
+      const showButton = document.querySelector("#showButton");
+      const closeButton = document.querySelector(
+        "#registerDialog button[autofocus]"
+      );
+
+      showButton.addEventListener("click", () => {
+        library.registerDialog.showModal();
+      });
+      closeButton.addEventListener("click", () => {
+        library.registerDialog.close();
+      });
     </script>
   </body>
 </html>
