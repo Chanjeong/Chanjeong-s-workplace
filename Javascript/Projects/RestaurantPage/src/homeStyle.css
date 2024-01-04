@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'MyFont';
+  src: url('./my-font.woff2') format('woff2'),
+    url('./my-font.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+body{
+  background: rgb(255, 225, 72);
+}
+
+button{
+  position: relative;
+  border: 1px solid black;
+  background-color: rgb(255, 225, 72);
+  border-bottom: none;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 5px;
+  margin-left: 15px;
+  padding: 15px 30px;
+  left: 530px;
+}
+
+button:hover, button:active{
+  background-color: orange;
+}
