@@ -6,7 +6,7 @@ module.exports = {
   entry: {
     Home: "./src/Home.js",
     Menu: "./src/Menu.js",
-    Contact: "./src/Contact.js"
+    Contact: "./src/Contact.js",
   },
   devServer: {
     static: "./dist",
