@@ -1,0 +1,97 @@
+#menu-items{
+  background-color: rgb(255, 225, 72);
+  border-radius: 20px;
+  display: grid;
+  width: 60%;
+  position: relative;
+  left: 270px;
+  padding: 10px;
+}
+
+#menu-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display';
+  border: 5px solid brown;
+  background-color: rgb(253, 189, 70);
+  border-radius: 10px;
+  width: 500px;
+  height: 50px;
+  padding: 10px 30px;
+  margin-left: 140px;
+}
+
+#beverage-items{
+  display: grid;
+  grid-template-rows: 180px 280px 280px;
+  grid-template-columns: 400px;
+  border-radius: 10px;
+  width: 500px;
+  padding: 10px 30px;
+  margin-left: 190px;
+  grid-gap: 10px;
+}
+
+.beverage-title{
+  border: 5px solid brown;
+  background-color: rgb(253, 189, 70);
+  border-radius: 10px;
+  text-align: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.beverage-item{
+  position: relative;
+  border: 5px solid brown;
+  background-color: rgb(253, 189, 70);
+  font-weight: bold;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+#main-items{
+  display: grid;
+  grid-template-rows: 180px 400px 400px 400px 400px 400px 400px 400px 400px;
+  grid-template-columns: 400px;
+  border-radius: 10px;
+  width: 500px;
+  padding: 10px 30px;
+  margin-left: 190px;
+  grid-gap: 10px;
+}
+
+.main-title{
+  border: 5px solid brown;
+  background-color: rgb(253, 189, 70);
+  border-radius: 10px;
+  text-align: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.main-item{
+  position: relative;
+  border: 5px solid brown;
+  background-color: rgb(253, 189, 70);
+  font-weight: bold;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+img{
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 200px;
+  height: 130px;
+  border-radius: 10px;
+  border: 3px solid rgb(196, 156, 36);
+  position: absolute; 
+  right: 0; 
+  bottom: 0; 
+}
+
+

@@ -30,11 +30,11 @@ button:hover, button:active{
 #main{
   background-image: url(restaurant.png);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
   padding: 20px;
 }
 
-#main-items{
+#home-items{
   background-color: rgb(255, 225, 72);
   border-radius: 20px;
   display: grid;
@@ -47,7 +47,7 @@ button:hover, button:active{
   padding: 10px;
 }
 
-#main-title{
+.home-title{
   display: flex;
   align-items: center;
   font-family: 'Playfair Display';
@@ -59,7 +59,7 @@ button:hover, button:active{
   margin-left: 140px;
 }
 
-.main-item ul{
+.home-item ul{
   margin: 4px;
   display: flex;
   flex-direction: column;
@@ -67,7 +67,7 @@ button:hover, button:active{
   padding-right: 50px;
 }
 
-.main-item{
+.home-item{
   border: 5px solid brown;
   background-color: rgb(253, 189, 70);
   font-weight: bold;
