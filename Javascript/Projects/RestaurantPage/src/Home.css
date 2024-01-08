@@ -2,7 +2,16 @@
   font-family: 'Playfair Display';
   font-style: italic;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/playfairdisplay/v36/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTXtHA-Q.woff2) format('woff2');
+  src: 
+  url(https://fonts.gstatic.com/s/playfairdisplay/v36/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTXtHA-Q.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Bungee Spice';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bungeespice/v11/nwpTtK2nIhxE0q-IwgSpZBqyyCg_MMA.woff2) format('woff2');
 }
 
 body{
@@ -30,7 +39,8 @@ button:hover, button:active{
 #main{
   background-image: url(restaurant.png);
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
+  background-attachment: fixed;
   padding: 20px;
 }
 
@@ -75,4 +85,8 @@ button:hover, button:active{
   border-radius: 10px;
   position: relative;
   left: 220px;
+}
+
+.home-item h3{
+  font-family: 'Bungee Spice';
 }

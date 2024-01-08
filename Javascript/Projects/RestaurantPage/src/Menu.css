@@ -1,4 +1,4 @@
-#menu-items{
+#menu{
   background-color: rgb(255, 225, 72);
   border-radius: 20px;
   display: grid;
@@ -34,6 +34,7 @@
 }
 
 .beverage-title{
+  font-family: 'Playfair Display';
   border: 5px solid brown;
   background-color: rgb(253, 189, 70);
   border-radius: 10px;
@@ -64,6 +65,7 @@
 }
 
 .main-title{
+  font-family: 'Playfair Display';
   border: 5px solid brown;
   background-color: rgb(253, 189, 70);
   border-radius: 10px;
@@ -80,6 +82,10 @@
   border-radius: 10px;
   margin-top: 10px;
   padding: 10px;
+}
+
+h3{
+  font-family: 'Bungee Spice';
 }
 
 img{

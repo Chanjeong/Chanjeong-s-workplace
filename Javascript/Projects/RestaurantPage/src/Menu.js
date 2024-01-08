@@ -3,9 +3,9 @@ import "./Menu.css";
 
 function menuModule() {
   const menuTitle = document.createElement("div");
-  const menuItems = document.createElement("div");
+  const menu = document.createElement("div");
 
-  menuItems.id = "menu-items";
+  menu.id = "menu";
 
   //menu-title
   menuTitle.id = "menu-title";
@@ -58,7 +58,7 @@ function menuModule() {
   mainItem7.className = "main-item";
   mainItem8.className = "main-item";
 
-  mainTitle.innerHTML = "<h1>Main dishes</h1>";
+  mainTitle.innerHTML = "<h2>Main dishes</h2>";
 
   mainItem1.innerHTML = `<h3>Shin Ramen</h3>
   <div>Shin Ramyun is a brand of instant noodle (including cup ramyeon) that has been produced by the South Korean food company Nongshim since 1 October 1986.</div>
@@ -112,9 +112,9 @@ function menuModule() {
     mainItem8
   );
 
-  menuItems.append(menuTitle, beverage, main);
+  menu.append(menuTitle, beverage, main);
 
-  return menuItems;
+  return menu;
 }
 
 export default menuModule;

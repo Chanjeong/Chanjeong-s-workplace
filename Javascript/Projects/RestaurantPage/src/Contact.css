@@ -1,0 +1,48 @@
+#contact{
+  background-color: rgb(255, 225, 72);
+  border-radius: 20px;
+  display: grid;
+  width: 60%;
+  position: relative;
+  left: 270px;
+  padding: 10px;
+}
+
+.contact-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display';
+  border: 5px solid brown;
+  background-color: rgb(253, 189, 70);
+  border-radius: 10px;
+  width: 500px;
+  height: 50px;
+  padding: 10px 30px;
+  margin-left: 140px;
+}
+
+#contact-items{
+  display: grid;
+  grid-template-rows: repeat(3, 300px);
+  grid-template-columns: 400px;
+  border-radius: 10px;
+  width: 500px;
+  padding: 10px 30px;
+  margin-left: 190px;
+  grid-gap: 10px;
+}
+
+.contact-item{
+  position: relative;
+  border: 5px solid brown;
+  background-color: rgb(253, 189, 70);
+  font-weight: bold;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+h2{
+  font-family: 'Bungee Spice';
+}
