@@ -1,7 +1,7 @@
 import _ from "lodash";
 import "./Menu.css";
 
-function menuModule() {
+export default function menuModule() {
   const menuTitle = document.createElement("div");
   const menu = document.createElement("div");
 
@@ -116,5 +116,3 @@ function menuModule() {
 
   return menu;
 }
-
-export default menuModule;

@@ -1,7 +1,7 @@
 import _ from "lodash";
 import "./Contact.css";
 
-function contactModule() {
+export default function contactModule() {
   const contact = document.createElement("div");
   const contactTitle = document.createElement("div");
   const contactItems = document.createElement("div");
@@ -43,4 +43,3 @@ function contactModule() {
   return contact;
 }
 
-export default contactModule;
