@@ -163,8 +163,13 @@ class UserMain {
         projectDiv.innerHTML = `
             <div>${project.projects[i].type}</div>
             <div>${todosList}</div>
-            <button onClick="createUserTodo(project)">Create Todo</button>
+            <button id="createTodoButton">Create Todo</button>
             <button>Edit Project</button>`;
+
+        const createTodoButton = projectDiv.querySelector("#createTodoButton");
+        createTodoButton.addEventListener("click", () => {
+          this.createUserTodo(project.projects[i]);
+        });
 
         this.main.appendChild(projectDiv);
         console.log(projectDiv);
@@ -173,21 +178,20 @@ class UserMain {
   };
 
   createUserTodo = (project) => {
-    const TodoDialog = document.createElement("dialog");
-    TodoDialog.id = "todo-dialog";
+    const todoDialog = document.createElement("dialog");
+    todoDialog.id = "todo-dialog";
 
     const storeUserTodo = () => {
       const todoTitleInput = document.getElementById("title");
       const todoDescriptionInput = document.getElementById("description");
-      const todoDueDateInput = document.getElementById("dueDate");
+      const todoDueDateInput = document.getElementById("duedate");
       const todoPriorityInput = document.getElementById("priority");
 
       if (
-        todoTitleInput.checkValidity() &&
-        todoDescriptionInput.checkValidity() &&
-        todoDueDateInput.checkValidity() &&
-        todoPriorityInput.checkValidity() &&
-        project
+        todoTitleInput.value &&
+        todoDescriptionInput.value &&
+        todoDueDateInput.value &&
+        todoPriorityInput.value
       ) {
         const todoTitle = todoTitleInput.value;
         const todoDescription = todoDescriptionInput.value;
@@ -202,34 +206,40 @@ class UserMain {
         );
 
         project.todos.push(newTodo);
+        console.log();
+        console.log(newTodo);
         alert(`New list has been created!`);
 
-        todoTitleInput = "";
-        todoDescriptionInput = "";
-        todoDueDateInput = "";
-        todoPriority = "";
+        todoTitleInput.value = "";
+        todoDescriptionInput.value = "";
+        todoDueDateInput.value = "";
+        todoPriorityInput.value = "";
       } else {
-        alert("Please enter a project type!");
+        alert(`Fill in the valid input`);
       }
-
-      typeInput.value = "";
     };
 
-    projectDialog.innerHTML = `<label for="type">Type</label>
-    <input type="text" name="type" id="type" required />
+    todoDialog.innerHTML = `<label for="title">Title</label>
+    <input type="text" name="title" id="title" required />
+    <label for="description">Description</label>
+    <input type="text" name="description" id="description" required />
+    <label for="duedate">Due Date</label>
+    <input type="date" name="duedate" id="duedate" required />
+    <label for="priority">Priority</label>
+    <input type="number" name="priority" id="priority" required />
     <button id="createButton">Create</button>
     <button autofocus id="closeButton">Close</button>`;
 
-    const createButton = projectDialog.querySelector("#createButton");
-    const closeButton = projectDialog.querySelector("#closeButton");
+    const createButton = todoDialog.querySelector("#createButton");
+    const closeButton = todoDialog.querySelector("#closeButton");
 
-    createButton.addEventListener("click", storeUserProject);
+    createButton.addEventListener("click", storeUserTodo);
     closeButton.addEventListener("click", () => {
-      projectDialog.close();
+      todoDialog.close();
     });
 
-    document.body.appendChild(projectDialog);
-    projectDialog.showModal();
+    document.body.appendChild(todoDialog);
+    todoDialog.showModal();
   };
 }
 
