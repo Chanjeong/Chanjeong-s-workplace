@@ -151,33 +151,32 @@ class UserMain {
       for (let i = 0; i < project.projects.length; i++) {
         const projectDiv = document.createElement("div");
         projectDiv.classList.add("display-user-project");
-        const todosList = project.projects[i].todos
-          .map(
-            (todo) => `
-          <div>${todo.title}</div>
-          <div>${todo.description}</div>
-          <div>${todo.dueDate}</div>
-          <div>${todo.priority}</div>`
-          )
-          .join("");
-        projectDiv.innerHTML = `
-            <div>${project.projects[i].type}</div>
-            <div>${todosList}</div>
-            <button id="createTodoButton">Create Todo</button>
-            <button>Edit Project</button>`;
 
-        const createTodoButton = projectDiv.querySelector("#createTodoButton");
+        const projectTypeDiv = document.createElement("div");
+        projectTypeDiv.innerHTML = `${project.projects[i].type}`;
+        projectDiv.append(projectTypeDiv);
+
+        const todosDiv = document.createElement("div");
+        todosDiv.classList.add("todosDiv");
+
+        projectDiv.append(todosDiv);
+
+        const createTodoButton = document.createElement("button");
+        createTodoButton.innerHTML = "Create Todo";
         createTodoButton.addEventListener("click", () => {
-          this.createUserTodo(project.projects[i]);
+          this.createUserTodo(project.projects[i].todos);
         });
 
+        const editTodoButton = document.createElement("button");
+        editTodoButton.innerHTML = "Edit Todo";
+        projectDiv.append(createTodoButton, editTodoButton);
+
         this.main.appendChild(projectDiv);
-        console.log(projectDiv);
       }
     }
   };
 
-  createUserTodo = (project) => {
+  createUserTodo = (todos) => {
     const todoDialog = document.createElement("dialog");
     todoDialog.id = "todo-dialog";
 
@@ -188,10 +187,10 @@ class UserMain {
       const todoPriorityInput = document.getElementById("priority");
 
       if (
-        todoTitleInput.value &&
-        todoDescriptionInput.value &&
-        todoDueDateInput.value &&
-        todoPriorityInput.value
+        todoTitleInput.checkValidity() &&
+        todoDescriptionInput.checkValidity() &&
+        todoDueDateInput.checkValidity() &&
+        todoPriorityInput.checkValidity()
       ) {
         const todoTitle = todoTitleInput.value;
         const todoDescription = todoDescriptionInput.value;
@@ -205,9 +204,20 @@ class UserMain {
           todoPriority
         );
 
-        project.todos.push(newTodo);
-        console.log();
-        console.log(newTodo);
+        const todosDiv = document.querySelector(".todosDiv");
+        const todoDiv = document.createElement("div");
+        todoDiv.classList.add("todoDiv");
+        todoDiv.innerHTML = `
+          ${newTodo.title}
+          ${newTodo.description}
+          ${newTodo.dueDate}
+          ${newTodo.priority}
+          `;
+
+        todosDiv.appendChild(todoDiv);
+
+        todos.push(newTodo);
+
         alert(`New list has been created!`);
 
         todoTitleInput.value = "";
