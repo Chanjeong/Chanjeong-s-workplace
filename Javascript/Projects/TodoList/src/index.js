@@ -1,5 +1,4 @@
 import _ from "lodash";
-import "./style.css";
 
 class Project {
   constructor(type) {
