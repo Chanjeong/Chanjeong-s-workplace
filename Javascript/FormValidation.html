@@ -21,17 +21,24 @@
       <input type="text" name="zip" id="zip" />
       <span class="error"></span>
       <label for="password">Password</label>
-      <input type="password" name="password" id="password" />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        required
+        minlength="8"
+      />
       <span class="error"></span>
       <label for="confirmpassword">Confirm Password</label>
       <input type="password" name="confirmpassword" id="confirmpassword" />
       <span class="error"></span>
-      <button type="submit">Submit</button>
+      <button type="button" onClick="submitForm()">Submit</button>
     </form>
     <script>
-      const form = document.querySelector("form");
       const email = document.getElementById("email");
       const emailError = document.querySelector("#email + span.error");
+      const zip = document.getElementById("zip");
+      const zipError = document.querySelector("#zip + span.error");
       const password = document.getElementById("password");
       const passwordError = document.querySelector("#password + span.error");
       const confirmpassword = document.getElementById("confirmpassword");
@@ -39,72 +46,83 @@
         "#confirmpassword + span.error"
       );
 
-      email.addEventListener("input", (event) => {
-        if (email.validity.valid) {
-          emailError.textContent = "";
-          emailError.className = "error";
+      email.addEventListener("input", validateEmail);
+      password.addEventListener("input", validatePassword);
+      confirmpassword.addEventListener("input", validateConfirmPassword);
+      zip.addEventListener("input", validateZip);
+
+      function validateEmail() {
+        if (!email.checkValidity()) {
+          emailError.textContent = "Please enter a valid email address";
         } else {
-          showEmailError();
+          emailError.textContent = "";
         }
-      });
-
-      form.addEventListener("submit", (event) => {
-        if (!email.validity.valid) {
-          showEmailError();
-          event.preventDefault();
-        }
-      });
-
-      function showEmailError() {
-        if (email.validity.valueMissing) {
-          emailError.textContent = "Hey, give me the email address bro";
-        } else if (email.validity.typeMismatch) {
-          emailError.textContent = "Hey, wrong email addresss bro!";
-        }
-
-        emailError.className = "error active";
       }
 
-      // password.addEventListener("input", (event) => {
-      //   if (password.value === confirmpassword.value) {
-      //     confirmpassword.setCustomValidity("");
-      //   } else {
-      //     confirmpassword.setCustomValidity("Not match with password bro");
-      //   }
-      // });
+      function validatePassword() {
+        if (!password.checkValidity()) {
+          passwordError.textContent = "Please enter a valid password";
+        } else {
+          passwordError.textContent = "";
+        }
+      }
 
-      // function checkZip() {
-      //   const constraints = {
-      //     ch: [
-      //       "^(CH-)?\\d{4}$",
-      //       "Switzerland ZIPs must have exactly 4 digits: e.g. CH-1950 or 1950",
-      //     ],
-      //     fr: [
-      //       "^(F-)?\\d{5}$",
-      //       "France ZIPs must have exactly 5 digits: e.g. F-75012 or 75012",
-      //     ],
-      //     de: [
-      //       "^(D-)?\\d{5}$",
-      //       "Germany ZIPs must have exactly 5 digits: e.g. D-12345 or 12345",
-      //     ],
-      //     nl: [
-      //       "^(NL-)?\\d{4}\\s*([A-RT-Z][A-Z]|S[BCE-RT-Z])$",
-      //       "Netherland ZIPs must have exactly 4 digits, followed by 2 letters except SA, SD and SS",
-      //     ],
-      //   };
-      //   const country = document.getElementById("country").value;
-      //   const zip = document.getElementById("zip");
+      function validateConfirmPassword() {
+        if (confirmpassword.value !== password.value) {
+          confirmpasswordError.textContent = "Password do not match";
+        } else {
+          confirmpasswordError.textContent = "";
+        }
+      }
 
-      //   const constraint = new RegExp(constraints[country][0], "");
-      //   console.log(constraint);
+      function validateZip() {
+        const constraints = {
+          ch: [
+            "^(CH-)?\\d{4}$",
+            "Switzerland ZIPs must have exactly 4 digits: e.g. CH-1950 or 1950",
+          ],
+          fr: [
+            "^(F-)?\\d{5}$",
+            "France ZIPs must have exactly 5 digits: e.g. F-75012 or 75012",
+          ],
+          de: [
+            "^(D-)?\\d{5}$",
+            "Germany ZIPs must have exactly 5 digits: e.g. D-12345 or 12345",
+          ],
+          nl: [
+            "^(NL-)?\\d{4}\\s*([A-RT-Z][A-Z]|S[BCE-RT-Z])$",
+            "Netherland ZIPs must have exactly 4 digits, followed by 2 letters except SA, SD and SS",
+          ],
+        };
 
-      //   if (constraint.test(zip.value)) {
-      //     zip.setCustomValidity("");
-      //   } else {
-      //     zip.setCustomValidity(constraints[country][1]);
-      //   }
-      // }
+        const country = document.getElementById("country").value;
 
+        const constraint = new RegExp(constraints[country][0], "");
+
+        if (constraint.test(zip.value)) {
+          zipError.textContent = "";
+        } else {
+          zipError.textContent = `${constraints[country][1]}`;
+        }
+      }
+
+      function submitForm() {
+        validateEmail();
+        validateConfirmPassword();
+        validatePassword();
+        validateZip();
+
+        if (
+          emailError.textContent ||
+          passwordError.textContent ||
+          confirmpasswordError.textContent ||
+          zipError.textContent
+        ) {
+          alert("Please fill in the form correctly before submitting");
+        } else {
+          alert("High Five! Form submitted successfully!");
+        }
+      }
       // window.onload = () => {
       //   document.getElementById("country").onChange = checkZip;
       //   document.getElementById("zip").oninput = checkZip;
