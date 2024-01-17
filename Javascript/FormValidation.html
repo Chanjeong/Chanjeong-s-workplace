@@ -1,40 +1,114 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>Form validation: Task 3</title>
-    <style>
-      body {
-        background-color: #fff;
-        color: #333;
-        font: 1em / 1.4 Helvetica Neue, Helvetica, Arial, sans-serif;
-        padding: 1em;
-        margin: 0;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation</title>
   </head>
-
   <body>
-    <form>
-      <label for="mail"
-        >I would like you to provide me with an e-mail address:</label
-      >
-      <input type="email" id="mail" name="mail" minlength="10" />
-      <button>Submit</button>
+    <form novalidate>
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" required />
+      <span class="error"></span>
+      <label for="country">Country</label>
+      <select name="country" id="country">
+        <option value="ch">Switzerland</option>
+        <option value="fr">France</option>
+        <option value="de">Germany</option>
+        <option value="nl">Netherland</option>
+      </select>
+      <label for="zip"> ZIP Code</label>
+      <input type="text" name="zip" id="zip" />
+      <span class="error"></span>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" />
+      <span class="error"></span>
+      <label for="confirmpassword">Confirm Password</label>
+      <input type="password" name="confirmpassword" id="confirmpassword" />
+      <span class="error"></span>
+      <button type="submit">Submit</button>
     </form>
-  </body>
-  <script>
-    const email = document.getElementById("mail");
-    email.addEventListener("input", (event) => {
-      if (email.validity.typeMismatch) {
-        email.setCustomValidity("I am expecting an email address!");
-      } else {
-        email.setCustomValidity("");
+    <script>
+      const form = document.querySelector("form");
+      const email = document.getElementById("email");
+      const emailError = document.querySelector("#email + span.error");
+      const password = document.getElementById("password");
+      const passwordError = document.querySelector("#password + span.error");
+      const confirmpassword = document.getElementById("confirmpassword");
+      const confirmpasswordError = document.querySelector(
+        "#confirmpassword + span.error"
+      );
+
+      email.addEventListener("input", (event) => {
+        if (email.validity.valid) {
+          emailError.textContent = "";
+          emailError.className = "error";
+        } else {
+          showEmailError();
+        }
+      });
+
+      form.addEventListener("submit", (event) => {
+        if (!email.validity.valid) {
+          showEmailError();
+          event.preventDefault();
+        }
+      });
+
+      function showEmailError() {
+        if (email.validity.valueMissing) {
+          emailError.textContent = "Hey, give me the email address bro";
+        } else if (email.validity.typeMismatch) {
+          emailError.textContent = "Hey, wrong email addresss bro!";
+        }
+
+        emailError.className = "error active";
       }
-    });
-  </script>
+
+      // password.addEventListener("input", (event) => {
+      //   if (password.value === confirmpassword.value) {
+      //     confirmpassword.setCustomValidity("");
+      //   } else {
+      //     confirmpassword.setCustomValidity("Not match with password bro");
+      //   }
+      // });
+
+      // function checkZip() {
+      //   const constraints = {
+      //     ch: [
+      //       "^(CH-)?\\d{4}$",
+      //       "Switzerland ZIPs must have exactly 4 digits: e.g. CH-1950 or 1950",
+      //     ],
+      //     fr: [
+      //       "^(F-)?\\d{5}$",
+      //       "France ZIPs must have exactly 5 digits: e.g. F-75012 or 75012",
+      //     ],
+      //     de: [
+      //       "^(D-)?\\d{5}$",
+      //       "Germany ZIPs must have exactly 5 digits: e.g. D-12345 or 12345",
+      //     ],
+      //     nl: [
+      //       "^(NL-)?\\d{4}\\s*([A-RT-Z][A-Z]|S[BCE-RT-Z])$",
+      //       "Netherland ZIPs must have exactly 4 digits, followed by 2 letters except SA, SD and SS",
+      //     ],
+      //   };
+      //   const country = document.getElementById("country").value;
+      //   const zip = document.getElementById("zip");
+
+      //   const constraint = new RegExp(constraints[country][0], "");
+      //   console.log(constraint);
+
+      //   if (constraint.test(zip.value)) {
+      //     zip.setCustomValidity("");
+      //   } else {
+      //     zip.setCustomValidity(constraints[country][1]);
+      //   }
+      // }
+
+      // window.onload = () => {
+      //   document.getElementById("country").onChange = checkZip;
+      //   document.getElementById("zip").oninput = checkZip;
+      // };
+    </script>
+  </body>
 </html>
