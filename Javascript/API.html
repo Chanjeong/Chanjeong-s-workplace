@@ -2,21 +2,64 @@
   <head>
     <meta charset="UTF-8" />
     <title>Document</title>
+    <style>
+      #main {
+        display: grid;
+        grid-template-rows: auto;
+        grid-gap: 10px;
+      }
+      #searchBox {
+        display: flex;
+        gap: 10px;
+      }
+      #search {
+        width: 300px;
+        border-radius: 10px;
+      }
+    </style>
   </head>
   <body>
-    <img src="#" />
+    <div id="main">
+      <div id="SearchBox">
+        <label for="search">Search Image</label>
+        <input type="text" id="search" />
+        <button onClick="searchImage()">search</button>
+      </div>
+      <img src="#" />
+    </div>
     <script>
-      const img = document.querySelector("img");
-      fetch(
-        `https://api.giphy.com/v1/gifs/translate?api_key=TI35lFHl7ASo9xL6SeXdVH2YqUk99ysp&s=cats`,
-        { mode: "cors" }
-      )
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (response) {
-          img.src = response.data.images.original.url;
-        });
+      function searchImage() {
+        const typeInput = document.getElementById("search");
+        const img = document.querySelector("img");
+        if (!typeInput.value) {
+          alert("Please enter a search keyword");
+        }
+        fetch(
+          `https://api.giphy.com/v1/gifs/translate?api_key=TI35lFHl7ASo9xL6SeXdVH2YqUk99ysp&s=${typeInput.value}`,
+          { mode: "cors" }
+        )
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error(
+                `Failed to fetch GIF. Status: ${response.status}`
+              );
+            }
+            return response.json();
+          })
+          .then(function (response) {
+            if (
+              response.data &&
+              response.data.images &&
+              response.data.images.original &&
+              response.data.images.original.url
+            ) {
+              img.src = response.data.images.original.url;
+            }
+          })
+          .catch(function (error) {
+            console.error("Unexpected error:", error.message);
+          });
+      }
     </script>
   </body>
 </html>
