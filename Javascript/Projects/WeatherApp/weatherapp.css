@@ -1,0 +1,37 @@
+body{
+  margin: 0;
+  height: 100vh;
+  background-image: linear-gradient(
+    rgb(166, 254, 255),
+    rgb(152, 255, 136),
+    white 
+  );
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+}
+
+#location{
+  width: 200px;
+  border: none;
+  border-radius: 10px;
+}
+
+#loading {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#weather-information{
+  margin: 50px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+img{
+  vertical-align: middle;
+  margin-left: 10px;
+}
