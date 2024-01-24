@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var nestedObject = {
+        data: {
+          info: {
+            stuff: {
+              thing: {
+                moreStuff: {
+                  magicNumber: 44,
+                  something: "foo2",
+                },
+              },
+            },
+          },
+        },
+      };
+
+      function contains(obj, value) {
+        for (var key in obj) {
+          console.log(key);
+          if (typeof obj[key] == "object") {
+            if (contains(obj[key], value)) {
+              return true;
+            }
+          } else {
+            if (obj[key] === value) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+      let hasIt = contains(nestedObject, 44); // true
+      let doesntHaveIt = contains(nestedObject, "foo"); // false
+
+      console.log(hasIt);
+      console.log(doesntHaveIt);
+    </script>
+  </body>
+</html>
