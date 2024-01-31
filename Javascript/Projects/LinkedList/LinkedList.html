@@ -24,6 +24,7 @@
               return true;
             }
           },
+          //첫 번째 노드를 추가할 때, 기존의 this.head에 새로운 노드를 할당하는 부분이 빠져 있습니다.
           prepend(value) {
             let firstNode = Node(value);
             if (this.head) {
@@ -32,6 +33,7 @@
             this.head = firstNode;
             return true;
           },
+          //무한 루프에 빠지는 문제가 있습니다. currentNode를 이동시키는 부분이 누락되어 있습니다.
           size() {
             let currentNode = this.head;
             let total = 1;
@@ -65,6 +67,7 @@
             }
             return currentNode;
           },
+          //오타 및 로직 오류가 있습니다.
           pop() {
             let currentNode = this.head;
             let previousNode = null;
@@ -78,6 +81,7 @@
               this.head = null;
             }
           },
+          //return을 잘못 사용했습니다. 값을 찾았을 때 return true, 찾지 못했을 때 return false를 수정하세요:
           contain(value) {
             let currentNode = this.head;
             while (currentNode) {
@@ -88,6 +92,7 @@
             }
             return false;
           },
+
           find(value) {
             let currentNode = this.head;
             let index = 1;
@@ -100,6 +105,7 @@
             }
             return null;
           },
+
           toString() {
             let lists = [];
             let currentNode = this.head;
@@ -110,6 +116,7 @@
             console.log(lists.join("->"));
             return true;
           },
+          //insertAt 함수와 removeAt 함수에서 currentNode를 선언하기 전에 let으로 선언해야 합니다:
           insertAt(value, index) {
             let newNode = Node(value);
             if (index === 1) {
@@ -166,6 +173,18 @@
       function Node(value = null, nextNode = null) {
         return { value, nextNode };
       }
+
+      //=는 할당 연산자이며, 변수에 값을 할당할 때 사용됩니다.
+      // ==는 동등 연산자로서 값만 비교하며, 자료형은 신경쓰지 않습니다. 자바스크립트에서는 자동 형 변환을 수행하여 비교합니다.
+      // ===는 일치 연산자로서 값과 자료형을 모두 비교합니다. 값과 자료형이 모두 동일한 경우에만 true를 반환합니다.
+
+      // 간단한 기억법:
+      // = (할당 연산자): 변수에 값을 할당할 때 사용
+      // == (동등 연산자): 값만 비교하며 자동 형 변환이 이루어짐
+      // === (일치 연산자): 값과 자료형이 모두 일치해야 함
+      // 자바스크립트에서는 ===를 사용하는 것이 일반적으로 권장되는데,
+      // 이는 자료형까지 비교하기 때문에 예상치 못한 결과를 방지할 수 있기 때문입니다.
+      // 예를 들어, ==에서는 서로 다른 자료형 간의 비교 시 자동 형 변환이 이루어져 예상치 못한 결과를 가져올 수 있습니다.
 
       const linkedlist = LinkedList();
       console.log(linkedlist.append("hyunsu"));
