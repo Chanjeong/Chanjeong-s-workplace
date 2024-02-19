@@ -1,48 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <script>
-      function mergeSort(array) {
-        if (array.length <= 1) {
-          return array;
-        }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
 
-        const middle = Math.floor(array.length / 2);
-        const left = array.slice(0, middle);
-        const right = array.slice(middle);
 
-        return merge(mergeSort(left), mergeSort(right));
+  <script>
 
-        function merge(left, right) {
-          let result = [];
-          let leftIndex = 0;
-          let rightIndex = 0;
+    function Linkedlist(){
 
-          while (leftIndex < left.length && rightIndex < right.length) {
-            if (left[leftIndex] < right[rightIndex]) {
-              result.push(left[leftIndex]);
-              leftIndex++;
-            } else {
-              result.push(right[rightIndex]);
-              rightIndex++;
-            }
-          }
-          return result
-            .concat(left.slice(leftIndex))
-            .concat(right.slice(rightIndex));
-        }
-      }
+    }
 
-      let first = [3, 2, 1, 13, 8, 5, 0, 1];
-      let second = [105, 79, 100, 110];
-
-      console.log(mergeSort(first));
-      console.log(mergeSort(second));
-    </script>
-  </body>
+    function Node(value = null, nextNode = null){
+      
+    }
+  </script>
+  
+</body>
 </html>
