@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Node(data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+      }
+
+      function Tree(dataArray) {
+        this.root = buildTree(dataArray);
+      }
+
+      // 이전에 구현한 buildTree 함수를 여기에 포함시켜 사용
+
+      // 삽입 함수
+      Tree.prototype.insert = function (value) {
+        this.root = insertNode(this.root, value);
+      };
+
+      function insertNode(node, value) {
+        if (node === null) {
+          return new Node(value);
+        }
+
+        if (value < node.data) {
+          node.left = insertNode(node.left, value);
+        } else if (value > node.data) {
+          node.right = insertNode(node.right, value);
+        }
+
+        return node;
+      }
+
+      // 삭제 함수
+      Tree.prototype.delete = function (value) {
+        this.root = deleteNode(this.root, value);
+      };
+
+      function findMin(node) {
+        while (node.left !== null) {
+          node = node.left;
+        }
+        return node;
+      }
+
+      function deleteNode(node, value) {
+        if (node === null) {
+          return null;
+        }
+
+        if (value < node.data) {
+          node.left = deleteNode(node.left, value);
+        } else if (value > node.data) {
+          node.right = deleteNode(node.right, value);
+        } else {
+          // Node to be deleted found
+          if (node.left === null && node.right === null) {
+            // Case 1: Node with no children
+            node = null;
+          } else if (node.left === null) {
+            // Case 2: Node with one child (right child)
+            node = node.right;
+          } else if (node.right === null) {
+            // Case 2: Node with one child (left child)
+            node = node.left;
+          } else {
+            // Case 3: Node with two children
+            const minRightNode = findMin(node.right);
+            node.data = minRightNode.data;
+            node.right = deleteNode(node.right, minRightNode.data);
+          }
+        }
+
+        return node;
+      }
+
+      // 찾기 함수
+      Tree.prototype.find = function (value) {
+        return findNode(this.root, value);
+      };
+
+      function findNode(node, value) {
+        if (node === null || node.data === value) {
+          return node;
+        }
+
+        if (value < node.data) {
+          return findNode(node.left, value);
+        } else {
+          return findNode(node.right, value);
+        }
+      }
+
+      // 너비 우선 탐색 함수
+      Tree.prototype.levelOrder = function (callback) {
+        if (!callback) {
+          const result = [];
+          levelOrderTraversal(this.root, result.push.bind(result));
+          return result;
+        } else {
+          levelOrderTraversal(this.root, callback);
+        }
+      };
+
+      function levelOrderTraversal(node, callback) {
+        if (node === null) {
+          return;
+        }
+
+        const queue = [];
+        queue.push(node);
+
+        while (queue.length > 0) {
+          const currentNode = queue.shift();
+          callback(currentNode.data);
+
+          if (currentNode.left !== null) {
+            queue.push(currentNode.left);
+          }
+
+          if (currentNode.right !== null) {
+            queue.push(currentNode.right);
+          }
+        }
+      }
+
+      // 깊이 우선 탐색 함수들
+      Tree.prototype.inOrder = function (callback) {
+        const result = [];
+        inOrderTraversal(this.root, callback || result.push.bind(result));
+        return result;
+      };
+
+      Tree.prototype.preOrder = function (callback) {
+        const result = [];
+        preOrderTraversal(this.root, callback || result.push.bind(result));
+        return result;
+      };
+
+      Tree.prototype.postOrder = function (callback) {
+        const result = [];
+        postOrderTraversal(this.root, callback || result.push.bind(result));
+        return result;
+      };
+
+      function inOrderTraversal(node, callback) {
+        if (node !== null) {
+          inOrderTraversal(node.left, callback);
+          callback(node.data);
+          inOrderTraversal(node.right, callback);
+        }
+      }
+
+      function preOrderTraversal(node, callback) {
+        if (node !== null) {
+          callback(node.data);
+          preOrderTraversal(node.left, callback);
+          preOrderTraversal(node.right, callback);
+        }
+      }
+
+      function postOrderTraversal(node, callback) {
+        if (node !== null) {
+          postOrderTraversal(node.left, callback);
+          postOrderTraversal(node.right, callback);
+          callback(node.data);
+        }
+      }
+
+      // 트리 높이 계산 함수
+      Tree.prototype.height = function () {
+        return calculateHeight(this.root);
+      };
+
+      function calculateHeight(node) {
+        if (node === null) {
+          return -1; // 노드가 없을 경우 -1 반환
+        }
+
+        const leftHeight = calculateHeight(node.left);
+        const rightHeight = calculateHeight(node.right);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+      }
+
+      // 트리 깊이 계산 함수
+      Tree.prototype.depth = function (nodeValue) {
+        return calculateDepth(this.root, nodeValue, 0);
+      };
+
+      function calculateDepth(node, targetValue, currentDepth) {
+        if (node === null) {
+          return -1; // 노드가 없을 경우 -1 반환
+        }
+
+        if (node.data === targetValue) {
+          return currentDepth;
+        }
+
+        const leftDepth = calculateDepth(
+          node.left,
+          targetValue,
+          currentDepth + 1
+        );
+        const rightDepth = calculateDepth(
+          node.right,
+          targetValue,
+          currentDepth + 1
+        );
+
+        return Math.max(leftDepth, rightDepth);
+      }
+
+      // 트리 균형 여부 확인 함수
+      Tree.prototype.isBalanced = function () {
+        return checkBalance(this.root);
+      };
+
+      function checkBalance(node) {
+        if (node === null) {
+          return true; // 노드가 없으면 균형이 유지됨
+        }
+
+        const leftHeight = calculateHeight(node.left);
+        const rightHeight = calculateHeight(node.right);
+
+        const heightDiff = Math.abs(leftHeight - rightHeight);
+
+        if (heightDiff > 1) {
+          return false; // 균형이 깨짐
+        }
+
+        return checkBalance(node.left) && checkBalance(node.right);
+      }
+
+      // 트리 균형 맞추기 함수
+      Tree.prototype.rebalance = function () {
+        const nodes = [];
+        inOrderTraversal(this.root, nodes.push.bind(nodes));
+
+        this.root = buildTree(nodes);
+      };
+
+      // 사용 예시
+      const dataArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+      const myTree = new Tree(dataArray);
+
+      console.log("Original Tree:");
+      myTree.levelOrder(console.log);
+
+      console.log("\nInsert 10:");
+      myTree.insert(10);
+      myTree.levelOrder(console.log);
+
+      console.log("\nDelete 7:");
+      myTree.delete(7);
+      myTree.levelOrder(console.log);
+
+      console.log("\nFind 5:", myTree.find(5));
+      console.log("\nFind 100:", myTree.find(100));
+
+      console.log("\nIn-Order Traversal:", myTree.inOrder());
+      console.log("\nPre-Order Traversal:", myTree.preOrder());
+      console.log("\nPost-Order Traversal:", myTree.postOrder());
+
+      console.log("\nTree Height:", myTree.height());
+      console.log("\nDepth of Node 9:", myTree.depth(9));
+
+      console.log("\nIs Balanced:", myTree.isBalanced());
+
+      console.log("\nRebalance Tree:");
+      myTree.rebalance();
+      myTree.levelOrder(console.log);
+    </script>
+  </body>
+</html>

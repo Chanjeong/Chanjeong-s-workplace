@@ -60,7 +60,7 @@
             }
           },
           length() {
-            return size;
+            return size + 1;
           },
           clear() {
             return (buckets = new Array(16));
@@ -98,7 +98,14 @@
       const myMap = new HashMap();
       console.log(myMap.set("Carlos", "I am the old value."));
       console.log(myMap.set("Carlos", "I am the new value."));
+      console.log(myMap.set("Chanjeong Park", "Best developers in the world"));
+      console.log(myMap.set("Heungmin Son", "Best footballer in the world"));
+      console.log(myMap.set("DaeHo Lee", "Best baseball player in the world"));
       console.log(myMap.get("Carlos"));
+      console.log(myMap.length());
+      console.log(myMap.keys());
+      console.log(myMap.values());
+      console.log(myMap.entries());
     </script>
   </body>
 </html>
