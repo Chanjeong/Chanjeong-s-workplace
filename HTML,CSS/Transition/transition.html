@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      #delay {
-        font-size: 14px;
-        transition-property: font-size;
-        transition-duration: 4s;
-        transition-delay: 2s;
-      }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            button {
+                color: white;
+                border: none;
+                background-color: rgb(45, 102, 248);
+                border-radius: 10px;
+                padding: 15px 20px;
+                transition: background-color 1s ease-out 0.25s;
+            }
 
-      #delay:hover{
-        font-size: 36px;
-      }
-    </style>
-  </head>
-  <body>
-    <button id="delay">Click me!</button>
-  </body>
+            button:hover {
+                background-color: rgb(45, 102, 248);
+            }
+        </style>
+    </head>
+    <body>
+        <button>Transition!</button>
+    </body>
 </html>
