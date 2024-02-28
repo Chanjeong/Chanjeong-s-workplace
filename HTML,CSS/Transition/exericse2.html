@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        button {
+            font-weight: bold;
+            border: none;
+            background-color: #0e78dc;
+            color: white;
+            border-radius: 5px;
+            padding: 20px 20px;
+        }
+        h1,
+        h5 {
+            margin: 0;
+        }
+        #close {
+            margin-top: 20px;
+        }
+        #popup {
+            border-radius: 5px;
+            padding: 30px 60px;
+            text-align: center;
+
+            animation-name: popup;
+            animation-duration: 0.5s;
+            animation-iteration-count: 1;
+        }
+
+        @keyframes popup {
+            from {
+                margin-top: -50%;
+                opacity: 0;
+            }
+
+            to {
+                margin-top: 40%;
+                opacity: 100%;
+            }
+        }
+    </style>
+    <body>
+        <button id="show">Show Modal</button>
+        <dialog id="popup">
+            <h1>Look at me!</h1>
+            <h5>I'm a pop up dialog!</h5>
+            <button id="close">Close Modal</button>
+        </dialog>
+
+        <script>
+            const showButton = document.getElementById('show');
+            const closeButton = document.getElementById('close');
+            showButton.addEventListener('click', () => {
+                popup.showModal();
+            });
+            closeButton.addEventListener('click', () => {
+                popup.close();
+            });
+        </script>
+    </body>
+</html>
