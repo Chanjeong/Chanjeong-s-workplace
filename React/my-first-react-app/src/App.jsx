@@ -1,34 +1,13 @@
 import './App.css';
-import Avatar from './Avatar.jsx';
 
-function Card({ children }) {
-    return (
-        <div className="card">
-            <div className="card-content">{children}</div>
-        </div>
-    );
-}
-export default function Profile() {
-    return (
-        <Card>
-            <Avatar
-                title={'Photo'}
-                person={{
-                    name: 'Aklilu Lemma',
-                    imageId: 'OKS67lhm',
-                }}
-                size={70}
-            />
-            <Avatar
-                title={'About'}
-                about={
-                    'Aklilu Lemma was a distinguished Ethiopian scientist who discovered a natural treatment to schistosomiasis.'
-                }
-            />
-        </Card>
-    );
-}
+export default function FeedbackForm() {
+    function handleClick() {
+        const name = prompt('What is your name?');
+        alert(`Hello, ${name}!`);
+    }
 
+    return <button onClick={handleClick}>Greet</button>;
+}
 /* <div>
                 <a href="https://vitejs.dev" target="_blank">
                     <img src={viteLogo} className="logo" alt="Vite logo" />
